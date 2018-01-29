@@ -37,5 +37,10 @@ public class BulletProperties : MonoBehaviour {
         GameObject impactGO = Instantiate(impactEffect, pos, rot);
         Destroy(impactGO, 1f);
         Destroy(gameObject);
+
+        if(collision.gameObject.tag == "Enemy")
+        {
+            collision.gameObject.GetComponent<EnemyProperties>().health -= damage;
+        }
     }
 }

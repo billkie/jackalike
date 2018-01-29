@@ -5,7 +5,7 @@ using UnityEngine;
 public class RocketProperties : MonoBehaviour
 {
 
-    public float damage = 100f;
+    public float damage = 80f;
     public float rocketSpeed = 10f;
     public float lifeSpan = 3f;
     public GameObject impactEffect;
@@ -39,6 +39,11 @@ public class RocketProperties : MonoBehaviour
         Quaternion rot = Quaternion.FromToRotation(Vector3.forward, contact.normal);
         Vector3 pos = contact.point;
         Explode(pos, rot);
+
+        if (collision.gameObject.tag == "Enemy")
+        {
+            collision.gameObject.GetComponent<EnemyProperties>().health -= damage;
+        }
     }
 
     private void OnDisable()
